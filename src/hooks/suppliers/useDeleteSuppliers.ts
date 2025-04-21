@@ -12,9 +12,20 @@ export const UseDeleteSuppliers = () => {
       queryClient.invalidateQueries({ queryKey: ["suppliers"] });
       toast.success("Supplier deleted successfully");
     },
+    
     onError: (error) => {
-      toast.error(getErrorMessage(error));
+      console.log("Error recibido:", error); // Depuración
+      const status = (error as any)?.response?.status;
+      if (status === 409) {
+        toast.error(
+          "No puedes eliminar este proveedor porque está en uso. Verifica y vuelve a intentarlo."
+        );
+      } else {
+        toast.error(getErrorMessage(error));
+      }
     },
+    
+    
   });
 
   return { DeleteSuppliersMutation, isPending };

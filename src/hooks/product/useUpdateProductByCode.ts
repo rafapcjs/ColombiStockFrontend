@@ -2,9 +2,8 @@ import { UpdateProductByCode } from "@/services/product";
 import { ProductModeltDto } from "@/types/productModel";
 import { getErrorMessage } from "@/utilities/getServerErrorMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { get } from "http";
-import { toast } from "react-toastify";
- 
+ import { toast } from "react-toastify";
+
 export const useUpdateProductByCode = () => {
   const queryClient = useQueryClient();
 
@@ -27,7 +26,7 @@ export const useUpdateProductByCode = () => {
 
     onError: (error) => {
       // Manejo de errores utilizando getErrorMessage
-       toast.error(getErrorMessage(error));
+      toast.error(getErrorMessage(error));
     },
   });
 

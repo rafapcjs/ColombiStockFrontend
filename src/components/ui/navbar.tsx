@@ -28,7 +28,7 @@ const menuItems = [
     icon: <Tag className="h-5 w-5" />,
     submenu: [
       { title: "Categorías", href: "/category" },
-      { title: "Productos", href: "/productos" },
+      { title: "Productos", href: "/product" },
       { title: "Inventario", href: "/inventario" },
     ],
   },

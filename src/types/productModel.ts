@@ -7,10 +7,9 @@ export interface ProductModel {
   stockMin: number;
   unit?: string;
   code: string;
-  codigoCategoria: string;
-  dni_provedor: string;
+  nameCategory: string;
   suppliersName: string;
-}
+ }
 
 export type ProductModeltDto = Omit<ProductModel, "id_">;
 export type UpdateProductModel = Partial<ProductModel>;
