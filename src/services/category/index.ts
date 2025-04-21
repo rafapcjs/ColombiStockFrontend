@@ -22,41 +22,26 @@ export const UpdateCategory = async (code: string, category: CategoryModel) => {
 
 // Obtener todas las categorías con paginación y búsqueda
 export const GetAllCategories = async (
-  page: number = 0,
-  size: number = 10,
-  sortBy: string = "name",
-  direction: string = "asc",
-  searchTerm: string = ""
-): Promise<PaginatedResponse<CategoryModelDto>> => {
+  page = 0,
+  size = 10,
+  sortBy = "name",
+  direction = "asc",
+  searchTerm = ""
+) => {
   const params = new URLSearchParams({
     page: page.toString(),
     size: size.toString(),
     sortBy,
     direction,
+    ...(searchTerm.trim() && { name: searchTerm }),
   });
 
-  if (searchTerm.trim()) {
-    params.append("name", searchTerm); // Cambia "name" según lo que tu API espere
-  }
-
-  const url = `/categories?${params.toString()}`;
-
-  try {
-    const { data } = await colombiStockApi.get(url);
-    return data as PaginatedResponse<CategoryModelDto>;
-  } catch (error: any) {
-    const errorMessage = error.response?.data?.message || "Error al obtener las categorías";
-    throw new Error(errorMessage);
-  }
+  const { data } = await colombiStockApi.get(`/categories?${params}`);
+  return data as PaginatedResponse<CategoryModelDto>;
 };
 
 // Obtener categoría por código
-export const GetCategoryByCode = async (code: string): Promise<CategoryModelDto> => {
-  try {
-    const { data } = await colombiStockApi.get(`/categories/${code}`);
-    return data as CategoryModelDto;
-  } catch (error: any) {
-    const errorMessage = error.response?.data?.message || "Error al obtener la categoría por código";
-    throw new Error(errorMessage);
-  }
+export const GetCategoryByCode = async (code: string) => {
+  const { data } = await colombiStockApi.get(`/categories/${code}`);
+  return data as CategoryModelDto;
 };

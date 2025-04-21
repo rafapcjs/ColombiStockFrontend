@@ -53,10 +53,13 @@ function CategoryModal({ isOpen, onClose, category, mode }: CategoryModalProps) 
         setError("code", { message })
       }
     }
-
+  
     if (mode === "create") {
       createCategoryMutation(data as CategoryModel, {
-        onSuccess: onClose,
+        onSuccess: () => {
+          onClose()
+          reset() // Limpia los campos después de crear
+        },
         onError: handleError,
       })
     } else if (mode === "edit" && category) {
@@ -66,13 +69,15 @@ function CategoryModal({ isOpen, onClose, category, mode }: CategoryModalProps) 
           category: data as CategoryModel,
         },
         {
-          onSuccess: onClose,
+          onSuccess: () => {
+            onClose()
+            reset() // Limpia los campos después de editar
+          },
           onError: handleError,
         },
       )
     }
   }
-
   const title = mode === "create" ? "Create Category" : "Edit Category"
   const buttonText = mode === "create" ? "Create" : "Update"
   const isLoading = isSubmitting
