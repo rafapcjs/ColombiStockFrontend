@@ -1,5 +1,5 @@
 import { UpdateProductByCode } from "@/services/product";
-import { ProductModeltDto } from "@/types/productModel";
+import { ProductModeltDto } from "@/types/ProductModel";
 import { getErrorMessage } from "@/utilities/getServerErrorMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
  import { toast } from "react-toastify";

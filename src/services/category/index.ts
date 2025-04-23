@@ -1,5 +1,5 @@
 import { colombiStockApi } from "@/api";
-import { CategoryModel, CategoryModelDto } from "@/types/categoryModel";
+import { CategoryModel, CategoryModelDto } from "@/types/CategoryModel";
 import { PaginatedResponse } from "@/types/PaginatedResponse";
 
 // Crear una categoría

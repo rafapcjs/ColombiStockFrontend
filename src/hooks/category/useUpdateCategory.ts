@@ -1,5 +1,5 @@
 import { UpdateCategory } from "@/services/category";
-import { CategoryModel } from "@/types/categoryModel";
+import { CategoryModel } from "@/types/CategoryModel";
 import { getErrorMessage } from "@/utilities/getServerErrorMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
   import { toast } from "react-toastify";

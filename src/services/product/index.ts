@@ -1,6 +1,6 @@
 import { colombiStockApi } from "@/api";
 import { PaginatedResponse } from "@/types/PaginatedResponse";
-import { CategoryProductCount, ProductCosts, ProductModel, ProductModeltDto } from "@/types/productModel";
+import { CategoryProductCount, ProductCosts, ProductModel, ProductModeltDto } from "@/types/ProductModel";
 
  
 

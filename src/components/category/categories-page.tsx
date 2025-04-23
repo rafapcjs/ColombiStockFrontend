@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PlusCircle, Search } from "lucide-react";
 import CategoryModal from "./category-modal";
-import type { CategoryModel } from "@/types/categoryModel";
+import type { CategoryModel } from "@/types/CategoryModel";
 import DeleteConfirmationModal from "./delete-confirmation-modal";
 import {
   Pagination,

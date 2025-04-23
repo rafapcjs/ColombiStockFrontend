@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PlusCircle, Search } from "lucide-react";
- import ProductModal from "./product-modal";
- 
+import ProductModal from "./product-modal";
+
 import {
   Pagination,
   PaginationContent,
@@ -15,7 +15,7 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
-import { ProductModeltDto } from "@/types/productModel";
+import { ProductModeltDto } from "@/types/ProductModel";
 import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
 import DeleteProductModal from "./delete-confirmationproducts-modal";
 import ProductsTable from "./product-table";
@@ -31,9 +31,15 @@ function ProductsPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<ProductModeltDto | null>(null);
+  const [selectedProduct, setSelectedProduct] =
+    useState<ProductModeltDto | null>(null);
 
-  const { products, isLoading } = useGetAllProducts(page, size, sortBy, direction);
+  const { products, isLoading } = useGetAllProducts(
+    page,
+    size,
+    sortBy,
+    direction
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,10 +49,17 @@ function ProductsPage() {
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
-  const filteredProducts = products?.content?.filter((product) =>
-    [product.name, product.brand, product.category, product.code]
-      .some((field) => field?.toLowerCase().includes(debouncedSearchTerm.toLowerCase()))
-  ) || [];
+  const filteredProducts =
+    products?.content?.filter((product) =>
+      [
+        product.name,
+        product.code,
+        product.description,
+        product.suppliersName,
+      ].some((field) =>
+        field?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+      )
+    ) || [];
 
   const handleEdit = (product: ProductModeltDto) => {
     setSelectedProduct(product);
@@ -85,7 +98,10 @@ function ProductsPage() {
     const result = [];
     for (let i = 0; i < uniquePageNumbers.length; i++) {
       result.push(uniquePageNumbers[i]);
-      if (i < uniquePageNumbers.length - 1 && uniquePageNumbers[i + 1] - uniquePageNumbers[i] > 1) {
+      if (
+        i < uniquePageNumbers.length - 1 &&
+        uniquePageNumbers[i + 1] - uniquePageNumbers[i] > 1
+      ) {
         result.push(-1);
       }
     }
@@ -122,7 +138,8 @@ function ProductsPage() {
       {!isLoading && products && products.totalElements > 0 && (
         <div className="flex items-center justify-between">
           <div className="text-sm text-muted-foreground">
-            Showing {products.numberOfElements} of {products.totalElements} products
+            Showing {products.numberOfElements} of {products.totalElements}{" "}
+            products
           </div>
 
           <div className="flex items-center space-x-6">
@@ -144,8 +161,14 @@ function ProductsPage() {
               <PaginationContent>
                 <PaginationItem>
                   <PaginationPrevious
-                    onClick={() => !isFirstPage && handlePageChange(currentPage - 1)}
-                    className={isFirstPage ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                    onClick={() =>
+                      !isFirstPage && handlePageChange(currentPage - 1)
+                    }
+                    className={
+                      isFirstPage
+                        ? "pointer-events-none opacity-50"
+                        : "cursor-pointer"
+                    }
                   />
                 </PaginationItem>
 
@@ -169,8 +192,14 @@ function ProductsPage() {
 
                 <PaginationItem>
                   <PaginationNext
-                    onClick={() => !isLastPage && handlePageChange(currentPage + 1)}
-                    className={isLastPage ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                    onClick={() =>
+                      !isLastPage && handlePageChange(currentPage + 1)
+                    }
+                    className={
+                      isLastPage
+                        ? "pointer-events-none opacity-50"
+                        : "cursor-pointer"
+                    }
                   />
                 </PaginationItem>
               </PaginationContent>

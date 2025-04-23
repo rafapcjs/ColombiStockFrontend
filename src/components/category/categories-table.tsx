@@ -1,20 +1,21 @@
-"use client"
+"use client";
 
-import type { CategoryModel } from "@/types/categoryModel"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Edit, Trash2 } from "lucide-react"
-import { Skeleton } from "@/components/ui/skeleton"
+import type { CategoryModel } from "@/types/CategoryModel";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Edit, Trash2 } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CategoriesTableProps {
-  categories: CategoryModel[]
-  isLoading: boolean
-  onEdit: (category: CategoryModel) => void
-  onDelete: (category: CategoryModel) => void
+  categories: CategoryModel[];
+  isLoading: boolean;
+  onEdit: (category: CategoryModel) => void;
+  onDelete: (category: CategoryModel) => void;
 }
- function CategoriesTable({ categories, isLoading, onEdit, onDelete }: CategoriesTableProps) {
+
+function CategoriesTable({ categories, isLoading, onEdit, onDelete }: CategoriesTableProps) {
   if (isLoading) {
-    return <TableSkeleton />
+    return <TableSkeleton />;
   }
 
   return (
@@ -22,10 +23,10 @@ interface CategoriesTableProps {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Code</TableHead>
-            <TableHead className="w-[100px]">Actions</TableHead>
+            <TableHead className="px-4 py-3">Name</TableHead>
+            <TableHead className="px-4 py-3">Description</TableHead>
+            <TableHead className="px-4 py-3">Code</TableHead>
+            <TableHead className="w-[100px] px-4 py-3">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -38,10 +39,10 @@ interface CategoriesTableProps {
           ) : (
             categories.map((category) => (
               <TableRow key={category.code}>
-                <TableCell className="font-medium">{category.name}</TableCell>
-                <TableCell>{category.description || "-"}</TableCell>
-                <TableCell>{category.code}</TableCell>
-                <TableCell>
+                <TableCell className="px-4 py-3 font-medium">{category.name}</TableCell>
+                <TableCell className="px-4 py-3">{category.description || "-"}</TableCell>
+                <TableCell className="px-4 py-3">{category.code}</TableCell>
+                <TableCell className="px-4 py-3">
                   <div className="flex space-x-2">
                     <Button variant="ghost" size="icon" onClick={() => onEdit(category)}>
                       <Edit className="h-4 w-4" />
@@ -57,7 +58,7 @@ interface CategoriesTableProps {
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
 
 function TableSkeleton() {
@@ -66,25 +67,25 @@ function TableSkeleton() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Code</TableHead>
-            <TableHead className="w-[100px]">Actions</TableHead>
+            <TableHead className="px-4 py-3">Name</TableHead>
+            <TableHead className="px-4 py-3">Description</TableHead>
+            <TableHead className="px-4 py-3">Code</TableHead>
+            <TableHead className="w-[100px] px-4 py-3">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {Array.from({ length: 5 }).map((_, index) => (
             <TableRow key={index}>
-              <TableCell>
+              <TableCell className="px-4 py-3">
                 <Skeleton className="h-5 w-[120px]" />
               </TableCell>
-              <TableCell>
+              <TableCell className="px-4 py-3">
                 <Skeleton className="h-5 w-[200px]" />
               </TableCell>
-              <TableCell>
+              <TableCell className="px-4 py-3">
                 <Skeleton className="h-5 w-[80px]" />
               </TableCell>
-              <TableCell>
+              <TableCell className="px-4 py-3">
                 <div className="flex space-x-2">
                   <Skeleton className="h-8 w-8 rounded-md" />
                   <Skeleton className="h-8 w-8 rounded-md" />
@@ -95,6 +96,7 @@ function TableSkeleton() {
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
+
 export default CategoriesTable;

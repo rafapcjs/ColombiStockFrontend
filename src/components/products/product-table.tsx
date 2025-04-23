@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ProductModel } from "@/types/productModel";
+import { ProductModel } from "@/types/ProductModel";
 
 interface ProductTableProps {
   products: ProductModel[];

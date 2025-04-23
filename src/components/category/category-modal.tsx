@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
-import type { CategoryModel } from "@/types/categoryModel"
+import type { CategoryModel } from "@/types/CategoryModel"
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"

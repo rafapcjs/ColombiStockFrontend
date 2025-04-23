@@ -5,7 +5,7 @@ import React from "react";
 const index = () => {
   return (
     <>
-      <Navbar />
+      <Navbar />1
       <main className="container mx-auto py-40 px-4">
         <ProductsPage />
       </main>

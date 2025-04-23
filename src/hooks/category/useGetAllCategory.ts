@@ -1,6 +1,6 @@
 import { GetAllCategories } from "@/services/category"
 import { useQuery, type UseQueryResult } from "@tanstack/react-query"
-import type { CategoryModel } from "@/types/categoryModel"
+import type { CategoryModel } from "@/types/CategoryModel"
 import { PaginatedResponse } from "@/types/PaginatedResponse"
  
 export const useGetAllCategories = (page = 0, size = 10, sortBy = "name", direction = "asc", searchTerm = "") => {

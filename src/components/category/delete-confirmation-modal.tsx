@@ -1,6 +1,6 @@
 "use client"
 
-import type { CategoryModel } from "@/types/categoryModel"
+import type { CategoryModel } from "@/types/CategoryModel"
  
 import {
   AlertDialog,
