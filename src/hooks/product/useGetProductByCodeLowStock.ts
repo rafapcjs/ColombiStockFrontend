@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
  
 export const UseGetProductByCodeLowStock = () => {
   const { data: product, isLoading } = useQuery({
-    queryKey: ["product"],
+    queryKey: ["products"],
     refetchInterval: 3000,
     queryFn: () => GetProductByCodeLowStock(),
   });

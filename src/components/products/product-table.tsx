@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ProductModel } from "@/types/ProductModel";
+import { ProductModel } from "@/types/products";
 
 interface ProductTableProps {
   products: ProductModel[];
@@ -41,7 +41,7 @@ function ProductTable({
             <TableHead className="px-4 py-2">Stock Min</TableHead>
             <TableHead className="px-4 py-2">Unit</TableHead>
             <TableHead className="px-4 py-2">Code</TableHead>
-            <TableHead className="px-4 py-2">Category</TableHead>
+            <TableHead className="px-4 py-2">Category Name</TableHead>
             <TableHead className="px-4 py-2">Supplier Name</TableHead>
             <TableHead className="px-4 py-2 w-[100px]">Actions</TableHead>
           </TableRow>
@@ -68,7 +68,7 @@ function ProductTable({
                 <TableCell className="px-4 py-2">{product.unit || "-"}</TableCell>
                 <TableCell className="px-4 py-2">{product.code}</TableCell>
                 <TableCell className="px-4 py-2">{product.nameCategory}</TableCell>
-                <TableCell className="px-4 py-2">{product.suppliersName}</TableCell>
+                <TableCell className="px-4 py-2">{product.nameSuppliers}</TableCell>
                 <TableCell className="px-4 py-2">
                   <div className="flex space-x-2">
                     <Button variant="ghost" size="icon" onClick={() => onEdit(product)}>

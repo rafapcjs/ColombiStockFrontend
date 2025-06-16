@@ -1,5 +1,5 @@
 import { UpdateProductByCode } from "@/services/product";
-import { ProductModeltDto } from "@/types/ProductModel";
+import { ProductModeltDto } from "@/types/products";
 import { getErrorMessage } from "@/utilities/getServerErrorMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
  import { toast } from "react-toastify";
@@ -20,6 +20,7 @@ export const useUpdateProductByCode = () => {
       // Invalidar las consultas de productos para asegurarse de que los datos se actualicen
       queryClient.invalidateQueries({ queryKey: ["products"] });
 
+      queryClient.invalidateQueries({ queryKey: ["suppliers"] });
       // Mostrar un mensaje de éxito cuando el producto se actualice correctamente
       toast.success("Producto actualizado exitosamente.");
     },

@@ -1,72 +1,85 @@
 import { colombiStockApi } from "@/api";
 import { PaginatedResponse } from "@/types/PaginatedResponse";
-import { CategoryProductCount, ProductCosts, ProductModel, ProductModeltDto } from "@/types/ProductModel";
+import {
+  ProductModel,
+  ProductModeltDto,
+  ProductCosts,
+  CategoryProductCount
+} from "@/types/products";
 
- 
+// ========== CRUD ==========
 
-export const DeleteProductByCode = async (code: string) => {
-  const { data } = await colombiStockApi.delete(`/products/${code}`);
+export const CreateProduct = async (product: ProductModel): Promise<ProductModel> => {
+  const { data } = await colombiStockApi.post("/products", product);
   return data;
 };
 
- 
-
-export const GetProductByCodeLowStock = async (
-  page: number = 0,
-  size: number = 10,
-  sortBy: string = "name",
-  direction: string = "asc"
-) => {
-  const url = `/products/search/low-stock?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
-
+export const GetAllProducts = async (
+  page = 0,
+  size = 10,
+  sortBy = "name",
+  direction = "asc"
+): Promise<PaginatedResponse<ProductModeltDto>> => {
+  const url = `/products?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
   const { data } = await colombiStockApi.get(url);
-
-  return data as PaginatedResponse<ProductModeltDto>;
+  return data;
 };
 
-export const FindProductsByPriceBetween = async () => {
-  const { data } = await colombiStockApi.get(
-    "/products/findProductsByPriceBetween"
-  );
-
-  return data as PaginatedResponse<ProductCosts>;
-};
-
-export const CountProductsByCategory = async (): Promise<
-  CategoryProductCount[]
-> => {
-  const { data } = await colombiStockApi.get("/products/countProductsByCategory");
-  return data as CategoryProductCount[];
-};
-
-export const GetProductByCode = async (code: string) => {
+export const GetProductByCode = async (code: string): Promise<ProductModeltDto> => {
   const { data } = await colombiStockApi.get(`/products/${code}`);
-  return data as ProductModeltDto;
+  return data;
 };
 
 export const UpdateProductByCode = async (
   code: string,
   product: ProductModeltDto
-) => {
+): Promise<ProductModeltDto> => {
   const { data } = await colombiStockApi.put(`/products/${code}`, product);
-  return data as ProductModeltDto;
+  return data;
 };
 
-export const GetAllProducts = async (
-  page: number = 0,
-  size: number = 10,
-  sortBy: string = "name",
-  direction: string = "asc"
-) => {
-  const url = `/products?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
+export const DeleteProductByCode = async (code: string): Promise<void> => {
+  await colombiStockApi.delete(`/products/${code}`);
+};
 
+// ========== CONSULTAS ESPECIALES ==========
+
+export const GetProductByCodeLowStock = async (
+  page = 0,
+  size = 10,
+  sortBy = "name",
+  direction = "asc"
+): Promise<PaginatedResponse<ProductModeltDto>> => {
+  const url = `/products/low_stock?page=${page}&size=${size}&sortBy=${sortBy}&direction=${direction}`;
   const { data } = await colombiStockApi.get(url);
-
-  return data as PaginatedResponse<ProductModeltDto>;
+  return data;
 };
 
-export const CreateProduct = async (product: ProductModel) => {
-  const { data } = await colombiStockApi.post("/products", product);
-  return data as ProductModel;
+export const FindProductsByPriceBetween = async (): Promise<PaginatedResponse<ProductCosts>> => {
+  const { data } = await colombiStockApi.get("/products/findProductsByPriceBetween");
+  return data;
 };
- 
+
+// ========== ESTADÍSTICAS ==========
+
+export const CountProductsByCategory = async (): Promise<CategoryProductCount[]> => {
+  const { data } = await colombiStockApi.get("/products/countProductsByCategory");
+  return data;
+};
+
+
+
+
+ export const CountProductWithLowStock= async()=>{
+
+  const {data}= await colombiStockApi.get('/products/count-low-stock');
+  return data as number;
+ }
+
+
+ export const SumTotallyStock = async () => {
+const { data } = await colombiStockApi.get('/products/total-stock');
+
+return data as number;
+
+ }

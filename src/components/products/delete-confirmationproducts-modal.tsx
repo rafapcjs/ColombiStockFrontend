@@ -11,8 +11,8 @@
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { UseDeleteProduct } from "@/hooks/product/useDeleteProduct";
-import { ProductModeltDto } from "@/types/ProductModel";
-import { Loader2 } from "lucide-react";
+import { ProductModeltDto } from "@/types/products";
+ import { Loader2 } from "lucide-react";
  
 interface DeleteProductModalProps {
   isOpen: boolean;

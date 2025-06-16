@@ -13,7 +13,7 @@ colombiStockApi.interceptors.request.use(
   (config) => {
     if (typeof window !== "undefined") {
       // Lee el mismo nombre que usaste en login
-      const token = localStorage.getItem("jwt");
+      const token = sessionStorage.getItem("jwt");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }

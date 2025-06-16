@@ -9,6 +9,7 @@ export const useGetAllProducts = (
 ) => {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products", page, size, sortBy, direction],
+    
     queryFn: () => GetAllProducts(page, size, sortBy, direction),
   });
 

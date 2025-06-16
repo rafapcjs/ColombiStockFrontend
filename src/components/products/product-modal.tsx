@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 
-import { ProductModeltDto } from "@/types/ProductModel";
+import { ProductModeltDto } from "@/types/products";
  
 import { UseGetAllSuppliers } from "@/hooks/suppliers/useGetAllSuppliers";
 import { useCreateProduct } from "@/hooks/product/useCreateProduct ";
@@ -39,25 +39,26 @@ function ProductModal({ isOpen, onClose, product, mode }: ProductModalProps) {
       setValue("name", product.name);
       setValue("description", product.description);
       setValue("price", product.price);
-      setValue("purchasePrice", product.purchasePrice);
-      setValue("stock", product.stock);
-      setValue("stockMin", product.stockMin);
       setValue("unit", product.unit);
       setValue("code", product.code);
       setValue("codigoCategoria", product.codigoCategoria);
       setValue("dni_provedor", product.dni_provedor);
+      setValue("fechaFabricacion", product.fechaFabricacion);  // Agregar la fecha de fabricación
+      setValue("vencimiento", product.vencimiento); // Agregar el vencimiento
+      setValue("stockMin", product.stockMin); // Agregar stockMin
     } else {
       reset();
     }
   }, [product, mode, setValue, reset]);
 
   const onSubmit = async (data: ProductModeltDto) => {
+    // Enviar el objeto de datos al backend con los campos correctos
     if (mode === "create") {
-        createProductMutation(data);
+      createProductMutation(data); // Enviar el objeto con los campos de vencimiento, name, etc.
     } else if (mode === "edit" && product) {
-       updateProductByCodeMutation({
+      updateProductByCodeMutation({
         code: product.code,
-        product: data,
+        product: data, // Incluye los campos correctos aquí
       });
     }
     onClose();
@@ -97,24 +98,39 @@ function ProductModal({ isOpen, onClose, product, mode }: ProductModalProps) {
             {errors.price && <p className="text-sm text-destructive">{errors.price.message}</p>}
           </div>
 
-          {/* Purchase Price */}
+          {/* Fecha de Fabricación */}
           <div className="grid gap-2">
-            <Label htmlFor="purchasePrice">Precio de Compra</Label>
-            <Input type="number" id="purchasePrice" {...register("purchasePrice", { required: "Precio de compra requerido" })} disabled={isLoading} />
-            {errors.purchasePrice && <p className="text-sm text-destructive">{errors.purchasePrice.message}</p>}
+            <Label htmlFor="fechaFabricacion">Fecha de Fabricación</Label>
+            <Input
+              type="date"
+              id="fechaFabricacion"
+              {...register("fechaFabricacion", { required: "Fecha de fabricación requerida" })}
+              disabled={isLoading}
+            />
+            {errors.fechaFabricacion && <p className="text-sm text-destructive">{errors.fechaFabricacion.message}</p>}
           </div>
 
-          {/* Stock */}
+          {/* Vencimiento */}
           <div className="grid gap-2">
-            <Label htmlFor="stock">Stock</Label>
-            <Input type="number" id="stock" {...register("stock", { required: "Stock requerido" })} disabled={isLoading} />
-            {errors.stock && <p className="text-sm text-destructive">{errors.stock.message}</p>}
+            <Label htmlFor="vencimiento">Fecha de Vencimiento</Label>
+            <Input
+              type="date"
+              id="vencimiento"
+              {...register("vencimiento")}
+              disabled={isLoading}
+            />
+            {errors.vencimiento && <p className="text-sm text-destructive">{errors.vencimiento.message}</p>}
           </div>
 
-          {/* StockMin */}
+          {/* Stock Mínimo */}
           <div className="grid gap-2">
             <Label htmlFor="stockMin">Stock Mínimo</Label>
-            <Input type="number" id="stockMin" {...register("stockMin", { required: "Stock mínimo requerido" })} disabled={isLoading} />
+            <Input
+              type="number"
+              id="stockMin"
+              {...register("stockMin", { required: "Stock mínimo requerido" })}
+              disabled={isLoading}
+            />
             {errors.stockMin && <p className="text-sm text-destructive">{errors.stockMin.message}</p>}
           </div>
 
@@ -177,3 +193,4 @@ function ProductModal({ isOpen, onClose, product, mode }: ProductModalProps) {
 }
 
 export default ProductModal;
+

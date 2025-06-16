@@ -1,10 +1,12 @@
-
+"use client";
 
 import CategoriesPage from '@/components/category/categories-page'
 import Navbar from '@/components/ui/navbar'
-import React from 'react'
+ import React from 'react'
 
 const index = () => {
+   
+
   return (
     <>
       <Navbar />

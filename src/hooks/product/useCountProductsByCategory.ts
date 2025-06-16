@@ -1,5 +1,5 @@
 import { CountProductsByCategory } from "@/services/product";
-import { CategoryProductCount } from "@/types/ProductModel";
+import { CategoryProductCount } from "@/types/products";
 import { useQuery } from "@tanstack/react-query";
  
 

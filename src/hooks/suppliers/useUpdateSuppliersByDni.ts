@@ -19,6 +19,7 @@ export const useUpdateSuppliersByDni = () => {
 
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["suppliers"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
 
         // Mostrar mensaje de éxito cuando el proveedor se actualice correctamente
         toast.success("Proveedor actualizado exitosamente.");

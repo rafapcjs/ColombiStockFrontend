@@ -15,7 +15,7 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
-import { ProductModeltDto } from "@/types/ProductModel";
+import { ProductModeltDto } from "@/types/products";
 import { useGetAllProducts } from "@/hooks/product/useGetAllProducts";
 import DeleteProductModal from "./delete-confirmationproducts-modal";
 import ProductsTable from "./product-table";

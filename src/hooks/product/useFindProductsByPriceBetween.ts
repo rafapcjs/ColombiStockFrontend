@@ -1,6 +1,6 @@
 import { FindProductsByPriceBetween } from "@/services/product";
 import { PaginatedResponse } from "@/types/PaginatedResponse";
-import { ProductCosts } from "@/types/ProductModel";
+import { ProductCosts } from "@/types/products";
 import { useQuery } from "@tanstack/react-query";
  
 

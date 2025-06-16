@@ -11,6 +11,9 @@ export const useCreateProduct = () => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
+            queryClient.invalidateQueries({ queryKey: ["sumProductTotally"] });
+
+      
       toast.success("Producto creado correctamente.");
     },
 
